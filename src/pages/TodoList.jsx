@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
+import '../../src/App.css';
+
 
 const url = "https://technical-brittaney-sitrc-bdf3a6c7.koyeb.app";
 const TodoList = () => {
@@ -53,7 +55,7 @@ const TodoList = () => {
     setNewTaskName(e.target.value);
     setCharCount(e.target.value.length);
   };
-  
+
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`${url}/api/todo/${id}`, {
@@ -132,34 +134,35 @@ const TodoList = () => {
   };
 
   return (
-    <div className="flex w-full h-[100vh] bg-gray-900">
-      <div className="container mx-auto mt-8 bg-gray-900 text-white">
+    <div className="flex w-full min-h-screen bg-gray-900">
+
+      <div className="container mx-auto mt-8 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold mb-8 text-center">Hey, {user}!</h1>
-        <div className="flex flex-row justify-center gap-10">
+        <div className="flex flex-col sm:flex-row justify-center gap-10">
           <div
-            className="p-4 bg-gray-800 rounded-lg w-56 cursor-pointer"
+            className="p-4 bg-gray-800 rounded-lg w-full sm:w-56 cursor-pointer"
             onClick={() => setIsModalOpen(true)}
           >
             <h2 className="text-md font-semibold">Create Task</h2>
             <p className="text-9xl text-center font-bold">+</p>
           </div>
 
-          <div className="p-4 bg-gray-800 rounded-lg w-56">
+          <div className="p-4 bg-gray-800 rounded-lg w-full sm:w-56">
             <h2 className="text-lg font-semibold">Total Tasks</h2>
             <p className="text-9xl text-center font-bold">{todoList.length}</p>
           </div>
 
-          <div className="p-4 bg-gray-800 rounded-lg w-56">
+          <div className="p-4 bg-gray-800 rounded-lg w-full sm:w-56">
             <h2 className="text-lg font-semibold">Remaining Tasks</h2>
             <p className="text-9xl text-center font-bold">{inCompleted}</p>
           </div>
 
-          <div className="p-4 bg-gray-800 rounded-lg w-56">
+          <div className="p-4 bg-gray-800 rounded-lg w-full sm:w-56">
             <h2 className="text-lg font-semibold">Completed Tasks</h2>
             <p className="text-9xl text-center font-bold">{completed}</p>
           </div>
 
-          <div className="bg-gray-800 w-56 p-4 rounded-lg">
+          <div className="bg-gray-800 w-full sm:w-56 p-4 rounded-lg">
             <svg className="w-full h-full" viewBox="0 0 100 100">
               <circle
                 cx="50"
@@ -198,7 +201,6 @@ const TodoList = () => {
           </div>
         </div>
         <div className="container mx-auto mt-8 p-3 bg-gray-900">
-          <h1 className="text-2xl font-bold mb-4">Todo List</h1>
           <div className="flex justify-center mb-4">
             <button
               className={`mr-4 px-4 py-2 rounded-full ${
@@ -231,20 +233,20 @@ const TodoList = () => {
               Complete
             </button>
           </div>
-          <div className="w-full gap-10 h-32 grid grid-cols-4">
+          <div className="w-full gap-10 sm:gap-8 h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pb-10">
             {filteredList.map((todo) => (
               <div
                 key={todo.id}
-                className={`rounded-md mb-4 h-32 max-h-32 w-80 text-white`}
+                className={`rounded-md mb-4 max-h-32 w-full text-white`}
               >
                 <div
                   className={`${
                     todo.done ? "border-green-500" : "border-red-500"
-                  } border-[1px] rounded-xl bg-gray-600`}
+                  } border-[1px] rounded-xl bg-gray-600 `}
                 >
-                  <div className="w-[19.7rem] bg-gray-800 shadow-md text-white h-28 p-4">
-                    <div className="mb-2 overflow-auto">
-                      <h6 className="text-lg font-semibold text-white">
+                  <div className="w-full bg-gray-800 rounded-xl shadow-md text-white h-28 p-4 overflow-y-scroll hide-scrollbar">
+                    <div className="mb-2">
+                      <h6 className="text-lg text-start font-semibold text-white">
                         {todo.task}
                       </h6>
                     </div>
@@ -271,10 +273,10 @@ const TodoList = () => {
           </div>
         </div>
       </div>
-     {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-white rounded-lg w-1/2">
+            <div className="bg-white rounded-lg w-full max-w-md mx-auto">
               <div className="p-4">
                 <h2 className="text-lg font-semibold mb-4">Add New Task</h2>
                 <input
@@ -285,7 +287,7 @@ const TodoList = () => {
                   maxLength={100}
                   onChange={handleTaskNameChange}
                 />
-                      <p className="text-right text-sm text-gray-500">{charCount}/100 characters</p>
+                <p className="text-right text-sm text-gray-500">{charCount}/100 characters</p>
 
                 <div className="flex items-center mb-2">
                   <input
