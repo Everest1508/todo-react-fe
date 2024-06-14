@@ -15,6 +15,7 @@ function App() {
         <Router>
           <ToastProvider>
             <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/home" element={<TodoList />} />
